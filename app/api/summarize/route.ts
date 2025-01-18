@@ -3,10 +3,6 @@ import { HfInference } from '@huggingface/inference';
 import ytdl from 'ytdl-core';
 import { YoutubeTranscript } from 'youtube-transcript';
 
-if (!process.env.HUGGING_FACE_API_KEY) {
-  throw new Error('Missing Hugging Face API key');
-}
-
 const hf = new HfInference(process.env.HUGGING_FACE_API_KEY);
 
 async function getVideoTranscript(url: string) {
@@ -29,7 +25,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
+ 
     // Get video transcript
     const transcript = await getVideoTranscript(url);
 
